@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<?php
+session_start();
+?>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -20,36 +23,20 @@
     <tr>
         <td class="inside-table">
             <div class="scroll-container">
-                <table>
-                    <tr><th>№</th><th>Статус выстрела</th></tr>
-                    <tr><td>1</td><td>Попадание</td></tr>
-                    <tr><td>2</td><td>Промох</td></tr>
-                    <tr><td>1</td><td>Попадание</td></tr>
-                    <tr><td>2</td><td>Промох</td></tr>
-                    <tr><td>1</td><td>Попадание</td></tr>
-                    <tr><td>2</td><td>Промох</td></tr>
-                    <tr><td>1</td><td>Попадание</td></tr>
-                    <tr><td>2</td><td>Промох</td></tr>
-                    <tr><td>1</td><td>Попадание</td></tr>
-                    <tr><td>2</td><td>Промох</td></tr>
-                    <tr><td>1</td><td>Попадание</td></tr>
-                    <tr><td>2</td><td>Промох</td></tr>
-                    <tr><td>1</td><td>Попадание</td></tr>
-                    <tr><td>2</td><td>Промох</td></tr>
-                    <tr><td>1</td><td>Попадание</td></tr>
-                    <tr><td>2</td><td>Промох</td></tr>
-                    <tr><td>1</td><td>Попадание</td></tr>
-                    <tr><td>2</td><td>Промох</td></tr>
-                    <tr><td>1</td><td>Попадание</td></tr>
-                    <tr><td>2</td><td>Промох</td></tr>
-                    <tr><td>1</td><td>Попадание</td></tr>
-                    <tr><td>2</td><td>Промох</td></tr>
-                    <tr><td>1</td><td>Попадание</td></tr>
-                    <tr><td>2</td><td>Промох</td></tr>
-                    <tr><td>1</td><td>Попадание</td></tr>
-                    <tr><td>2</td><td>Промох</td></tr>
-                    <tr><td>1</td><td>Попадание</td></tr>
-                    <tr><td>2</td><td>Промох</td></tr>
+                <table id="status-table">
+                    <tr><th>№</th><th>Статус выстрела</th><th>X</th><th>Y</th><th>R</th></tr>
+                    <?php
+                    $count = 1;
+                    if (isset($_SESSION['results'])) {
+                        foreach ($_SESSION['results'] as $result) { ?>
+                            <tr>
+                                <td><?php $count++; ?></td>
+                                <td><?php echo $result[3] ?></td>
+                                <td><?php echo $result[0] ?></td>
+                                <td><?php echo $result[1] ?></td>
+                                <td><?php echo $result[2] ?></td>
+                            </tr>
+                        <?php }} ?>
                 </table>
             </div>
         </td>
@@ -121,10 +108,13 @@
                     <button type="button" value="3" onclick="valueR(this)">3</button>
                     <button type="button" value="4" onclick="valueR(this)">4</button>
                     <button type="button" value="5" onclick="valueR(this)">5</button>
-                    <span id="r-eror" style="color: red">123</span>
+                    <span id="r-eror" style="color: red"></span>
                 </span>
                 <button type="submit">
                     Отправить
+                </button>
+                    <button type="button" onclick="localStorage.clear()">
+                    ОЧИСТКА ЕБА!
                 </button>
                 </div>
             </form>
@@ -134,5 +124,6 @@
 </table>
 
 </body>
+<script src="/js/jquery-3.6.0.min.js"></script>
 <script src="/js/post.js"></script>
 </html>
