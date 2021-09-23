@@ -1,5 +1,8 @@
-<header class="d-flex justify-content-center py-3">
-    <ul class="nav nav-pills">
-        <li class="nav-item"><a href="#" class="nav-link" aria-current="page">Сирый Савва Игоревич P33312 Вариант: 10215</a></li>
-    </ul>
-</header>
+<tr>
+    <th class="header" colspan="4">
+        <h1>
+            <header>Сирый Савва Игоревич P33312 Вариант: 10215
+            </header>
+        </h1>
+    </th>
+</tr>

@@ -13,9 +13,9 @@ session_start();
 </head>
 <body>
 <table class="main-table" style="margin-bottom: 1%; height: 100%">
-    <tr>
-        <th class="header" colspan="4"><h1>Сирый Савва Игоревич P33312</h1></th>
-    </tr>
+    <?php
+    include ('blocks/header.php');
+    ?>
     <tr style="height: 40px">
         <th style="width: 30%;" colspan="1"><h2>Выстрелы</h2></th>
         <th style="width: 70%"><h2>График</h2></th>
@@ -115,9 +115,14 @@ session_start();
                 <button type="submit">
                     Отправить
                 </button>
-                    <button type="button" onclick="localStorage.clear()">
-                    ОЧИСТКА ЕБА!
-                </button>
+<!--                    <script type="text/javascript">-->
+<!--                        function logout() {-->
+<!--                            document.location = 'logout.php';-->
+<!--                        }-->
+<!--                        LogoutButton.addEventListener('click', logout, false);-->
+<!--                    </script>-->
+
+                    <button id="LogoutButton">Очистка</button>
                 </div>
             </form>
         </th>
