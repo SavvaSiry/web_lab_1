@@ -49,29 +49,27 @@ document.addEventListener('DOMContentLoaded', () => {
             send = true;
         }
 
-        const data = {
-            "x": x,
-            "y": y,
-            "r": r
-        };
         if (send) {
             $.ajax({
                 url: 'php/checkHitPoint.php',
                 type: "POST",
-                data: JSON.stringify(data),
-                contentType: 'application/json',
-                dataType: 'json',
+                dataType : "json",
+                data: {
+                    x : x,
+                    y : y,
+                    r : r
+                },
                 success: function (response) {
-                    var status = response.status;
+                    let status = response.status;
+                    let data = response.data;
+                    let speed = response.speed;
                     document.getElementById("status-table")
                         .insertAdjacentHTML('beforeend',
-                            '<tr><td>'+i+'++</td><td>'+ status +'</td><td>'+ x +'</td><td>'+ y +'</td><td>'+ r +'</td></tr>');
+                            '<tr><td>1</td><td>'+ status +'</td><td>'+ x +'</td><td>'+ y +'</td><td>'+ r +'</td><td>'+ data +'</td><td>'+ speed +'</td></tr>');
                 },
-
                 error: function(response) { // Данные не отправлены
                     console.log("В ошибке" + response);
                 }
-
             });
         }
     });

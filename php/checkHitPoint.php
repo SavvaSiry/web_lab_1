@@ -1,46 +1,53 @@
 <?php
 session_start();
 $start = microtime(true);
-$data = file_get_contents('php://input');
-$array = json_decode($data, true);
+try {
+    $dt = new DateTime("now", new DateTimeZone('Europe/Moscow'));
+} catch (Exception $e) {
+}
 
-$x = (int)$array['x'];
-$y = (int)$array['y'];
-$r = (int)$array['r'];
+if (isset($_POST['x'])) $x = $_POST['x'];
+if (isset($_POST['y'])) $y = $_POST['y'];
+if (isset($_POST['r'])) $r = $_POST['r'];
 
 if (($x < -2 || $x > 2) || ($y < -5 || $y > 5) || ($r > 5 || $r < 0)) {
     echo "{\"status\": \"Нарушена валидация\"}";
 } else if ($y < 0 & $x < 0) {
     if (($y < (-$x - $r))) {
-        saveSession("Промах");
-        echo "{\"status\": \"Промах\"}";
+        $time = number_format(microtime(true) - $start, 6);
+        saveSession($time, "Промах");
+        echo "{\"status\": \"Промах\", \"data\": \"" . $dt->format('H:i:s') . "\", \"speed\": \"".$time."\"}";
     }
 } elseif ($x < 0 && $y > 0) {
-    if ($x < ($r / 2) && $y > $r)
-        saveSession("Промах");
-        echo "{\"status\": \"Промах\"}";
+    if ($x < ($r / 2) && $y > $r) {
+        $time = number_format(microtime(true) - $start, 6);
+        saveSession($time, "Промах");
+        echo "{\"status\": \"Промах\", \"data\": \"" . $dt->format('H:i:s') . "\", \"speed\": \"".$time."\"}";
+    }
 } elseif ($x > 0 && $y > 0) {
     if ($r < pow($x, 2) + pow($y, 2)) {
-        saveSession("Промах");
-        echo "{\"status\": \"Промах\"}";
+        $time = number_format(microtime(true) - $start, 6);
+        saveSession($time, "Промах");
+        echo "{\"status\": \"Промах\", \"data\": \"" . $dt->format('H:i:s') . "\", \"speed\": \"".$time."\"}";
     }
 } elseif ($x > 0 && $y < 0) {
-    saveSession("Промах");
-    echo "{\"status\": \"Промах\"}";
+    $time = number_format(microtime(true) - $start, 6);
+    saveSession($time, "Промах");
+    echo "{\"status\": \"Промах\", \"data\": \"" . $dt->format('H:i:s') . "\", \"speed\": \"".$time."\"}";
 } elseif ($x === 0 && $y === 0) {
-    saveSession("Попал");
-    echo "{\"status\": \"Попал\"}";
+    $time = number_format(microtime(true) - $start, 6);
+    saveSession($time, "Попал");
+    echo "{\"status\": \"Попал\", \"data\": \"" . $dt->format('H:i:s') . "\", \"speed\": \"".$time."\"}";
+
 } else {
-    saveSession("Попал");
-    echo "{\"status\": \"Попал\"}";
+    $time = number_format(microtime(true) - $start, 6);
+    saveSession($time, "Попал");
+    echo "{\"status\": \"Попал\", \"data\": \"" . $dt->format('H:i:s') . "\", \"speed\": \"".$time."\"}";
 }
 
-function saveSession($status)
+function saveSession($time, $status)
 {
-    global $start, $x, $y, $r;
-    $time = number_format(microtime(true) - $start, 6);
-
-    $dt = new DateTime("now", new DateTimeZone('Europe/Moscow'));
+    global $dt, $x, $y, $r;
     $result = array($x, $y, $r, $status, $dt->format('H:i:s'), $time);
     if (!isset($_SESSION['results'])) {
         $_SESSION['results'] = array();

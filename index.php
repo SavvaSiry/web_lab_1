@@ -24,7 +24,7 @@ session_start();
         <td class="inside-table">
             <div class="scroll-container">
                 <table id="status-table">
-                    <tr><th>№</th><th>Статус выстрела</th><th>X</th><th>Y</th><th>R</th></tr>
+                    <tr><th>№</th><th>Статус выстрела</th><th>X</th><th>Y</th><th>R</th><th>Data</th><th>Speed</th></tr>
                     <?php
                     $count = 1;
                     if (isset($_SESSION['results'])) {
@@ -35,6 +35,8 @@ session_start();
                                 <td><?php echo $result[0] ?></td>
                                 <td><?php echo $result[1] ?></td>
                                 <td><?php echo $result[2] ?></td>
+                                <td><?php echo $result[4] ?></td>
+                                <td><?php echo $result[5] ?></td>
                             </tr>
                         <?php }} ?>
                 </table>
@@ -124,6 +126,6 @@ session_start();
 </table>
 
 </body>
-<script src="/js/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 <script src="/js/post.js"></script>
 </html>
