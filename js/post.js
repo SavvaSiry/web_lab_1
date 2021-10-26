@@ -61,11 +61,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 },
                 success: function (response) {
                     let status = response.status;
-                    let data = response.data;
-                    let speed = response.speed;
+                    let data = response.dateTime;
+                    let speed = response.time;
                     document.getElementById("status-table")
                         .insertAdjacentHTML('beforeend',
-                            '<tr><td>1</td><td>'+ status +'</td><td>'+ x +'</td><td>'+ y +'</td><td>'+ r +'</td><td>'+ data +'</td><td>'+ speed +'</td></tr>');
+                            '<tr><td>'+ status +'</td><td>'+ x +'</td><td>'+ y +'</td><td>'+ r +'</td><td>'+ data +'</td><td>'+ speed +'</td></tr>');
                 },
                 error: function(response) { // Данные не отправлены
                     console.log("В ошибке" + response);

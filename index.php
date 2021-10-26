@@ -1,7 +1,7 @@
-<!DOCTYPE html>
 <?php
 session_start();
 ?>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -12,52 +12,46 @@ session_start();
 
 </head>
 <body>
-<table class="main-table" style="margin-bottom: 1%; height: 100%">
+<table class="main-table" style=" height: 90%">
     <?php
-    include ('blocks/header.php');
+    include('blocks/header.php');
     ?>
-    <tr style="height: 40px">
-        <th style="width: 30%;" colspan="1"><h2>Выстрелы</h2></th>
-        <th style="width: 70%"><h2>График</h2></th>
+    <tr style="height: 30px">
+        <th class="text" style="width: 40%;" colspan="1"><h2>Выстрелы</h2></th>
+        <th class="text" style="width: 60%"><h2>График</h2></th>
     </tr>
     <tr>
         <td class="inside-table">
             <div class="scroll-container">
                 <table id="status-table">
-                    <tr><th>№</th><th>Статус выстрела</th><th>X</th><th>Y</th><th>R</th><th>Data</th><th>Speed</th></tr>
+                    <tr>
+                        <th width="130px">Статус выстрела</th>
+                        <th>X</th>
+                        <th>Y</th>
+                        <th>R</th>
+                        <th>Data</th>
+                        <th>Speed</th>
+                    </tr>
                     <?php
-                    $count = 1;
                     if (isset($_SESSION['results'])) {
                         foreach ($_SESSION['results'] as $result) { ?>
                             <tr>
-                                <td><?php $count++; ?></td>
-                                <td><?php echo $result[3] ?></td>
-                                <td><?php echo $result[0] ?></td>
-                                <td><?php echo $result[1] ?></td>
-                                <td><?php echo $result[2] ?></td>
-                                <td><?php echo $result[4] ?></td>
-                                <td><?php echo $result[5] ?></td>
+                                <td><?php echo $result['status'] ?></td>
+                                <td><?php echo $result['x'] ?></td>
+                                <td><?php echo $result['y'] ?></td>
+                                <td><?php echo $result['r'] ?></td>
+                                <td><?php echo $result['dateTime'] ?></td>
+                                <td><?php echo $result['time'] ?></td>
                             </tr>
-                        <?php }} ?>
+                        <?php }
+                    } ?>
                 </table>
             </div>
         </td>
         <td style="width: 80%">
             <div class="schedule-container" style="">
-                <svg class="point"  style="margin-left: 92px; margin-top: 2px;" viewBox="0 0 10 10">
-                    <circle cx="5" cy="5" r="2.5" fill="red"/>
-                </svg>
-                <svg class="point" style="margin-left: 0px; margin-top: 2px;"  viewBox="0 0 10 10">
-                    <circle cx="5" cy="5" r="2.5" fill="red"/>
-                </svg>
-                <svg class="point"  style="margin-left: 0px; margin-top: 92px;" viewBox="0 0 10 10">
-                    <circle cx="5" cy="5" r="2.5" fill="red"/>
-                </svg>
-                <svg class="point" style="margin-top: -92px;" viewBox="0 0 10 10">
-                    <circle cx="5" cy="5" r="2.5" fill="red"/>
-                </svg>
                 <div class="img-container">
-                    <img src="/img/schedule.jpg" alt="График не загрузился">
+                    <img src="/img/graf.png" alt="График не загрузился">
 
                 </div>
             </div>
@@ -65,10 +59,10 @@ session_start();
     </tr>
     <tr>
         <th class="input-block" style="" colspan="3">
-            <form id="post" name="myForm">
-                <div style="margin-top: 10px">
+            <form id="post" name="myForm" style="margin-top: 20px">
+                <span class="text" style="margin-top: 10px">
                     Кордианта X
-                    <button type="button" value="-2" onclick="valueX(this)">
+                    <button style="margin-left: 10px" type="button" value="-2" onclick="valueX(this)">
                         -2
                     </button>
                     <button type="button" value="-1.5" onclick="valueX(this)">
@@ -86,7 +80,7 @@ session_start();
                     <button type="button" value="0.5" onclick="valueX(this)">
                         0.5
                     </button>
-                    <button  type="button" value="1" onclick="valueX(this)">
+                    <button type="button" value="1" onclick="valueX(this)">
                         1
                     </button>
                     <button type="button" value="1.5" onclick="valueX(this)">
@@ -96,40 +90,30 @@ session_start();
                         2
                     </button>
                     <span id="x-eror" style="color: red"></span>
-                </div>
-                <div style="margin-top: 10px">
+                </span>
+                <span class="text" style="margin-top: 10px">
                     Кордината Y
                     <input type="text" name="Y" id="Y">
                     <span class="eror" style="color: red"></span>
-                </div>
-                <div style="margin-top: 10px">
-                <span>
+                </span>
+                <div class="box" style="margin-top: 10px">
+                <span class="text">
                     Радиус R
-                    <button type="button" value="1" onclick="valueR(this)">1</button>
+                    <button style="margin-left: 33px" type="button" value="1" onclick="valueR(this)">1</button>
                     <button type="button" value="2" onclick="valueR(this)">2</button>
                     <button type="button" value="3" onclick="valueR(this)">3</button>
                     <button type="button" value="4" onclick="valueR(this)">4</button>
                     <button type="button" value="5" onclick="valueR(this)">5</button>
                     <span id="r-eror" style="color: red"></span>
                 </span>
-                <button type="submit">
-                    Отправить
-                </button>
-<!--                    <script type="text/javascript">-->
-<!--                        function logout() {-->
-<!--                            document.location = 'logout.php';-->
-<!--                        }-->
-<!--                        LogoutButton.addEventListener('click', logout, false);-->
-<!--                    </script>-->
-
-                    <button id="LogoutButton">Очистка</button>
+                    <button class="text" type="submit">
+                        Отправить
+                    </button>
                 </div>
             </form>
         </th>
     </tr>
-
 </table>
-
 </body>
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 <script src="/js/post.js"></script>

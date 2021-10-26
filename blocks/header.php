@@ -1,7 +1,10 @@
-<tr>
-    <th class="header" colspan="4">
+<tr class="header">
+    <th style="border-radius: 20px" colspan="4">
         <h1>
-            <header>Сирый Савва Игоревич P33312 Вариант: 10215
+            <header  class="text">
+                <h1>
+                    Сирый Савва Игоревич P33312 Вариант: 10215
+                </h1>
             </header>
         </h1>
     </th>
